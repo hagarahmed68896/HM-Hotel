@@ -10,16 +10,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Orbitron&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<style>
-    *{
-        font-family: 'Poppins', sans-serif;
-    }
-    .h-font{
-        font-family: 'Merienda', cursive;
-    }
-</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />    
+
+    <style>
+      *{
+          font-family: 'Poppins', sans-serif;
+      }
+      .h-font{
+          font-family: 'Merienda', cursive;
+      }
+    </style>
 </head>
-<body>
+<body class="bg-light">
+  <!-- navbar, login and register modal -->
 <nav class="navbar navbar-expand-lg bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php">HM Hotel</a>
@@ -112,7 +115,7 @@
                     <label class="form-label">Name</label>
                     <input type="text" class="form-control shadw-none">
                 </div>
-                <div class="col-md-6 p-0">
+                <div class="col-md-6 p-0 mb-3">
                     <label class="form-label">Email</label>
                     <input type="email" class="form-control shadw-none">
                 </div>
@@ -146,28 +149,65 @@
                 </div>
               </div>
             </div>
-                <!-- <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control shadw-none">
-                </div>
-                <div class="mb-4">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control shadw-none">
-                </div>
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <button type="submit" class="btn btn-dark shadow-none">
-                      Login
+            <div class="text-center my-1">
+                 <button type="submit" class="btn btn-dark shadow-none">
+                      Register
                     </button>
-                    <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forget password?</a>
-                </div> -->
+            </div>
             </div> 
-   
         </form>
-
     </div>
   </div>
 </div>
 
+
+
+
+
+<!-- carousel -->
+<div class="container-fluid px-lg-4 mt-4">
+  <div class="swiper swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="images/carousel/IMG_15372.png" class="w-100 d-block"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/carousel/IMG_40905.png" class="w-100 d-block"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/carousel/IMG_55677.png" class="w-100 d-block"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/carousel/IMG_62045.png" class="w-100 d-block"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/carousel/IMG_93127.png" class="w-100 d-block"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/carousel/IMG_99736.png" class="w-100 d-block"/>
+        </div>
+      </div>
+    
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script>
+    var swiper = new Swiper(".swiper-container", {
+      spaceBetween: 30,
+      effect: "fade",
+      loop:true,
+      autoplay: {
+   delay: 5000,
+   disapleOnInteraction: false,
+ },
+    });
+  </script>
 </body>
 </html>
