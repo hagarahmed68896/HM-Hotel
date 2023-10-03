@@ -3,160 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HM Hotel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Orbitron&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />    
-    <link rel="stylesheet" href="css/common.css">
+    <title>HM Hotel - HOME</title>
+    <?php require("components/links.php")?>
 </head>
 
 
 <body class="bg-light">
   <!-- navbar, login and register modal -->
-<nav class="navbar navbar-expand-lg bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php">HM Hotel</a>
-    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link me-2 active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="#">Rooms</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="#">Facilities</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="#">Contact us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-   
-     
-      </ul>
-        <div class="d-flex" role="search">
-            <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Login
-            </button>
-            <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-3" data-bs-toggle="modal" data-bs-target="#registerModal">
-                Register
-            </button>
-        </div>
-    </div>
-  </div>
-</nav>
-
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <form action="">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 d-flex align-items-center">
-                <i class="bi bi-person-circle fs-3 me-2"></i> User Login
-                </h1>
-                <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control shadw-none">
-                </div>
-                <div class="mb-4">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control shadw-none">
-                </div>
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <button type="submit" class="btn btn-dark shadow-none">
-                      Login
-                    </button>
-                    <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forget password?</a>
-                </div>
-            </div>
-   
-        </form>
-
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <form action="">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 d-flex align-items-center">
-                <i class="bi bi-person-lines-fill fs-3 me-2"></i> User Registeration
-                </h1>
-                <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <span class="badge rounded-pill text-bg-light mb-3 text-wrap lh-base">
-              Note: Your details must match with your ID (ID card, passport, driving license, etc)
-              that will be required during check-in.
-            </span>
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-6 ps-0 mb-3">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-control shadw-none">
-                </div>
-                <div class="col-md-6 p-0 mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control shadw-none">
-                </div>
-                <div class="col-md-6 ps-0 mb-3">
-                    <label class="form-label">Phone Number</label>
-                    <input type="text" class="form-control shadw-none">
-                </div>
-                <div class="col-md-6 p-0 mb-3">
-                    <label class="form-label">Picture</label>
-                    <input type="file" class="form-control shadw-none">
-                </div>
-                <div class="col-md-12 mb-3 p-0 ">
-                    <label class="form-label">Address</label>
-                    <textarea class="form-control shadow-none"  row=1></textarea>
-                </div>
-                <div class="col-md-6 ps-0 mb-3">
-                    <label class="form-label">Pincode</label>
-                    <input type="number" class="form-control shadw-none">
-                </div>
-                <div class="col-md-6 p-0 mb-3">
-                    <label class="form-label">Date of birth</label>
-                    <input type="date" class="form-control shadw-none">
-                </div>
-                <div class="col-md-6 ps-0 mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control shadw-none">
-                </div>
-                <div class="col-md-6 p-0 mb-3">
-                    <label class="form-label">Confirm password</label>
-                    <input type="password" class="form-control shadw-none">
-                </div>
-              </div>
-            </div>
-            <div class="text-center my-1">
-                 <button type="submit" class="btn btn-dark shadow-none">
-                      Register
-                    </button>
-            </div>
-            </div> 
-        </form>
-    </div>
-  </div>
-</div>
-
-
-
-
+<?php require("components/nav.php") ?>
 
 
 <!-- carousel -->
@@ -185,10 +39,6 @@
     
     </div>
 </div>
-
-
-
-
 
 
 <!-- check availability form  -->
@@ -225,10 +75,6 @@
     </div>
   </div>
 </div>
-
-
-
-
 
 
 
@@ -397,11 +243,6 @@
 
 
 
-
-
-
-
-
 <!-- facilitaies -->
 <h2 class="mt-4 mb-4 pt-4 text-center fw-bold h-font">OUR FACILITIES</h2>
 <div class="container mt-5 mb-5">
@@ -436,11 +277,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
 
 
 
@@ -513,11 +349,6 @@
 
 
 
-
-
-
-
-
 <!-- reach us -->
 <h2 class="mt-4 mb-4 pt-4 text-center fw-bold h-font">REACH US</h2>
 <div class="container mt-5">
@@ -560,45 +391,8 @@
 
 
 
-
-
-
-
 <!-- footer -->
-<div class="container-fluid bg-white mt-5">
-  <div class="row">
-    <div class="col-lg-4 p-4">
-      <h3 class="fs-3 h-font fw-bold mb-2">HM Hotel</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Enim excepturi, animi iure quae explicabo ducimus expedita quos quo quidem,
-        iusto culpa voluptas reprehenderit nobis assumenda.
-        Qui maiores facere aliquid praesentium?
-      </p>
-    </div>
-    <div class="col-lg-4 p-4">
-      <h5 class="mb-3">Links</h5>
-      <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">Home</a><br>
-      <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">Rooms</a><br>
-      <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">Facilities</a><br>
-      <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">Contact Us</a><br>
-      <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">About</a>
-
-    </div>
-    <div class="col-lg-4 p-4">
-      <h5 class="mb-3">Follow Us</h5>
-      <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">
-        <i class="bi bi-twitter me-1"></i>  Twitter</a><br>
-      <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">
-          <i class="bi bi-facebook me-1"></i>  Facebook</a><br>
-      <a href="#" class="d-inline-block text-dark text-decoration-none">
-            <i class="bi bi-instagram me-1"></i>  Instagram</a><br>
-    </div>
-  </div>
-</div>
-
-
-<h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed by Hagar Ahmed WEBDEVE</h6>
+<?php require("components/footer.php") ?>
 
 
 
