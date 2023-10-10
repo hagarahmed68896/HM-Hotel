@@ -10,6 +10,8 @@ if(isset($_POST['get_general'])){
     $data = mysqli_fetch_assoc($res);
     echo json_encode($data);   // Encode the data as JSON and echo it
 }
+
+
 if(isset($_POST['update_general'])){
     $frm_data = filteration($_POST);
     $q =" UPDATE `settings` SET `site_title`=?,`site_about`=? WHERE `sr_no`=?";
@@ -18,5 +20,11 @@ if(isset($_POST['update_general'])){
     echo $res;
     }
     
-
+    if(isset($_POST['upd_shutdown'])){
+        $frm_data = ($_POST['upd_shutdown'] == 0) ? 1 :0;
+        $q =" UPDATE `settings` SET `shutdown`=? WHERE `sr_no`=?";
+        $values = [$frm_data,1];
+        $res = update($q,$values,"ii");
+        echo $res;
+        }
 ?>
