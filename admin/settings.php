@@ -10,6 +10,13 @@ adminlogin();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Settings</title>
     <?php require('inc/links.php') ?>
+    <style>
+        .custom-alert{
+            position: fixed;
+            top: 80px;
+            right: 25px;
+            }
+    </style>
 </head>
 <body class="bg-light">
     <?php require('inc/header.php'); ?>
@@ -20,20 +27,122 @@ adminlogin();
                 <h3 class="mb-4">Settings</h3>
 
             <!-- General settings section -->
-    <div class="card ">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-    </div>
+                <div class="card ">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h5 class="card-title m-0">General Settings</h5>
+                            <button type="button" class="btn btn-dark btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#general-settings">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </button>
+                        </div>
+                        <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
+                        <p class="card-text" id="site_title"></p>
+                        <h6 class="card-subtitle mb-1 fw-bold">About Us</h6>
+                        <p class="card-text" id="site_about"></p>
+                    </div>
+                </div>
+
+            <!-- General settings modal  -->
+                <div class="modal fade" id="general-settings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form >
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">General Settings</h1>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Site Title</label>
+                                        <input type="text" name="site_title" id="site_title_inp" class="form-control shadw-none">
+                                    </div>
+                                    <div class="mb-3 ">
+                                        <label class="form-label">About us</label>
+                                        <textarea name="site_about" id="site_about_inp" class="form-control shadow-none"  row="6"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn text-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                                    <button type="button" onclick="update_general(site_title.value,site_about.value)" class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                                </div>
+                        </div>
+                        </form>
+                      
+                    </div>
+                </div>
+
+            <!-- Shutdwon section -->
+                <div class="card ">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h5 class="card-title m-0">General Settings</h5>
+                            <button type="button" class="btn btn-dark btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#general-settings">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </button>
+                        </div>
+                        <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
+                        <p class="card-text" id="site_title"></p>
+                        <h6 class="card-subtitle mb-1 fw-bold">About Us</h6>
+                        <p class="card-text" id="site_about"></p>
+                    </div>
+                </div>
+
+
+                
             </div>
         </div>
     </div>
 
 
     <?php require('inc/script.php') ?>
+    <script>
+        let general_data;
+        
+
+        function get_general() {
+            let site_title = document.getElementById("site_title");
+            let site_about = document.getElementById("site_about");
+            let site_title_inp = document.getElementById("site_title_inp");
+            let site_about_inp = document.getElementById("site_about_inp");
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST',"ajax/settings_crud.php",true);
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            xhr.onload = function(){
+                general_data = JSON.parse(this.responseText);
+                site_title.innerText = general_data.site_title;
+                site_about.innerText = general_data.site_about;
+
+                site_title_inp.value = general_data.site_title;
+                site_about_inp.value = general_data.site_about;
+            }
+            xhr.send('get_general');
+            
+        }
+
+
+        function update_general(site_title_val, site_about_val) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST',"ajax/settings_crud.php",true);
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+            xhr.onload = function(){
+                var myModal = document.getElementById('general-settings');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
+                if(this.responseText == 1){
+                    alert('success','Changes saved!')
+                    get_general();
+                }
+                else{
+                    // error_log($this->responseText);
+                    alert('error','No changes made!');
+                }
+            }
+
+            xhr.send('site_title=' + site_title_val + '&site_about=' + site_about_val + '&update_general');
+        }
+        window.onload = function(){
+            get_general();
+        }
+    </script>
 </body>
 </html>
