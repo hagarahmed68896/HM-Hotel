@@ -93,7 +93,7 @@ adminlogin();
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h5 class="card-title m-0">Contact Settings</h5>
-                        <button type="button" class="btn btn-dark btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#contact-settings">
+                        <button type="button" class="btn btn-dark btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#contacts-settings">
                             <i class="bi bi-pencil-square"></i> Edit
                         </button>
                     </div>
@@ -149,7 +149,7 @@ adminlogin();
 
 
             <!-- Contacts dtails modal -->
-            <div class="modal fade" id="contact-settings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="contacts-settings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <form id="contacts_s_form">
                         <div class="modal-content">
@@ -174,13 +174,13 @@ adminlogin();
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <i class="bi bi-telephone-fill"></i>
                                                     </span>
-                                                    <input type="text" class="form-control shadow-none" name="pn1_inp" id="pn1" required>
+                                                    <input type="text" class="form-control shadow-none" name="pn1" id="pn1_inp" required>
                                                 </div>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <i class="bi bi-telephone-fill"></i>
                                                     </span>
-                                                    <input type="text" class="form-control shadow-none" name="pn2_inp" id="pn2" required>
+                                                    <input type="text" class="form-control shadow-none" name="pn2" id="pn2_inp" required>
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -222,7 +222,7 @@ adminlogin();
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn text-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                                <button type="button" onclick="contacts_inp(contacts_data)" class="btn text-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
                                 <button type="submit"  class="btn custom-bg text-white shadow-none">SUBMIT</button>
                             </div>
                     </div>
@@ -244,6 +244,7 @@ adminlogin();
         let general_s_form = document.getElementById('general_s_form');
         let site_title_inp = document.getElementById("site_title_inp");
         let site_about_inp = document.getElementById("site_about_inp");
+        let contacts_s_form = document.getElementById('contacts_s_form');
 
         function get_general() {
             let site_title = document.getElementById("site_title");
@@ -279,6 +280,7 @@ adminlogin();
             e.preventDefault();
             update_general(site_title_inp.value,site_about_inp.value)
         })
+
 
         function update_general(site_title_val, site_about_val) {
             let xhr = new XMLHttpRequest();
@@ -323,7 +325,6 @@ adminlogin();
             xhr.send('upd_shutdown=' + val);
 }
 
-        
 
         function get_contacts() {
             let contacts_p_id = ['address','gmap','pn1','pn2','email','fb','insta','tw'];
@@ -339,11 +340,51 @@ adminlogin();
                     document.getElementById(contacts_p_id[i]).innerHTML = contacts_data[i+1];
                 }
                 iframe.src = contacts_data[9];
+                contacts_inp(contacts_data);
             }
             xhr.send('get_contacts');  
         }
 
 
+        function contacts_inp(data){
+            let contacts_inp_id = ['address_inp','gmap_inp','pn1_inp','pn2_inp','email_inp','fb_inp','insta_inp','tw_inp','iframe_inp'];
+            for(var i=0;i<contacts_inp_id.length;i++){
+                document.getElementById(contacts_inp_id[i]).value = data[i+1];
+            }
+        }
+
+        contacts_s_form.addEventListener('submit', function(e){
+            e.preventDefault();
+            upd_contacts();
+        });
+
+
+        function upd_contacts() {
+            let index = ['address','gmap','pn1','pn2','email','fb','insta','tw','iframe'];
+            let contacts_inp_id = ['address_inp','gmap_inp','pn1_inp','pn2_inp','email_inp','fb_inp','insta_inp','tw_inp','iframe_inp'];
+            let data_str = "";
+            for (i = 0; i < index.length;i++) {
+                data_str += index[i] + "=" + document.getElementById(contacts_inp_id[i]).value + '&'; 
+            }
+            data_str += "upd_contacts";
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST',"ajax/settings_crud.php",true);
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+            xhr.onload = function(){
+                var myModal = document.getElementById('contacts-settings');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
+                if (this.responseText == 1) {
+                        alert('success', 'Changes saved!');
+                        get_contacts();
+                } else {
+                        alert('success', 'No changes made!');
+                }
+            }
+            xhr.send(data_str);
+        }
 
         window.onload = function(){
             get_general();
